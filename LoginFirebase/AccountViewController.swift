@@ -24,6 +24,8 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        print("create VC")
+
         self.createView = CreateAccountView(frame: self.view.frame)
         self.view.addSubview(createView)
         self.createView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,20 +98,15 @@ extension AccountViewController: CreateAccountDelegate {
         
         if checkIfAllFieldsValid() {
         
-        if let email = self.createView.emailTextField.text {
-            if let password = self.createView.passwordTextField.text {
-    
-                FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
-                    // ...
-                }
+        if let email = self.createView.emailTextField.text, let password = self.createView.passwordTextField.text {
+                FirebaseManager.createAccount(with: email, and: password)
+
             }
-        }
-            
+                    
         let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "main-view-controller") as! MainViewController
-        
-        let navController = UINavigationController(rootViewController: destVC)
-        self.present(navController, animated:true, completion: nil)
-        }
+            self.present(destVC, animated: true, completion: nil)
+           
+       }
         
     }
     

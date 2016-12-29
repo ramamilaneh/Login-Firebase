@@ -21,6 +21,7 @@ import FacebookCore
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addNotificationObservers()
         loadInitialViewController()
        
 
@@ -51,8 +52,8 @@ import FacebookCore
 extension AppController {
     
     func loadInitialViewController() {
-//        let id: StoryboardID = FIRAuth.auth()?.currentUser != nil ? .mainVC : .loginVC
-        let id: StoryboardID = .loginVC
+        
+        let id: StoryboardID = FIRAuth.auth()?.currentUser?.uid != nil ? .mainVC : .loginVC
        self.actingVC = self.loadViewController(withID: id)
        self.add(viewController: self.actingVC, animated: true)
     }
@@ -69,6 +70,7 @@ extension AppController {
 extension AppController {
     
     func add(viewController: UIViewController, animated: Bool = false) {
+        
         self.addChildViewController(viewController)
         containerView.addSubview(viewController.view)
         containerView.alpha = 0.0
@@ -78,14 +80,17 @@ extension AppController {
         
         guard animated else { containerView.alpha = 1.0; return }
         
-        UIView.transition(with: containerView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+       UIView.transition(with: containerView, duration: 0.5, options: .transitionCrossDissolve, animations: {
             self.containerView.alpha = 1.0
         }) { _ in }
     }
     
     func switchViewController(with notification: Notification) {
+        
         switch notification.name {
         case Notification.Name.closeLoginVC:
+            switchToViewController(with: .mainVC)
+        case Notification.Name.closeAccountVC:
             switchToViewController(with: .mainVC)
         case Notification.Name.closeMainVC:
             switchToViewController(with: .loginVC)
@@ -96,6 +101,7 @@ extension AppController {
     }
     
     private func switchToViewController(with id: StoryboardID) {
+        
         let existingVC = actingVC
         existingVC?.willMove(toParentViewController: nil)
         actingVC = loadViewController(withID: id)
@@ -121,6 +127,7 @@ extension AppController {
 extension Notification.Name {
     
     static let closeLoginVC = Notification.Name("close-login-view-controller")
+    static let closeAccountVC = Notification.Name("create-account-view-controller")
     static let closeMainVC = Notification.Name("close-main-view-controller")
     
 }

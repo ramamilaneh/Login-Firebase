@@ -12,29 +12,23 @@ import Whisper
 
 struct UserNotification {
     
-   
+    
     
     static func show(_ notification: String) {
-        var murmur = Murmur(title: notification)
         
+        var murmur = Murmur(title: notification)
         murmur.titleColor = UIColor.red
         murmur.backgroundColor = UIColor.white
-        
         let whistleAction = WhistleAction.show(3.0)
-        
         Whisper.show(whistle: murmur, action: whistleAction)
     }
     
     static func showError(_ notification: String) {
-        print("alert called")
         
         var murmur = Murmur(title: notification)
-        
         murmur.titleColor = UIColor.red
         murmur.backgroundColor = UIColor.white
-        
         let whistleAction = WhistleAction.show(3.0)
-        
         Whisper.show(whistle: murmur, action: whistleAction)
         
     }

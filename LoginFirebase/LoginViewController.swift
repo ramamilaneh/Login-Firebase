@@ -25,7 +25,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         self.loginView.delegate = self
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,6 +59,21 @@ extension LoginViewController: LoginDelegate {
     
     func signInButtonTapped(with sender: LoginView) {
         print("signIn tapped")
+        if let email = self.loginView.emailTextField.text, let password = self.loginView.passwordTextField.text {
+            FirebaseManager.signIn(with: email, and: password, completion: { (success) in
+                if !success{
+                    let alertController = UIAlertController(title: "Error", message: "Email or Password is incorrect", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                }else{
+                    
+                    let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "main-view-controller") as! MainViewController
+                    self.present(destVC, animated: true, completion: nil)
+                }
+            })
+        }
     }
     
     func createAccountTapped(with sender: LoginView) {
@@ -67,11 +82,11 @@ extension LoginViewController: LoginDelegate {
         destVC.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
         destVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(destVC, animated: true, completion: nil)
-
+        
     }
     
     func forgotPasswordTapped(with sender: LoginView) {
         print("forgotPassword tapped")
-            }
+    }
 }
 

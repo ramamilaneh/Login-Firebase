@@ -12,7 +12,7 @@
         <!--App Controller-->
         <scene sceneID="Its-iL-tLO">
             <objects>
-                <viewController id="fTM-a9-wUB" customClass="AppController" customModule="FirebaseAuth" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fTM-a9-wUB" customClass="AppController" customModule="LoginFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GXQ-JV-H9e"/>
                         <viewControllerLayoutGuide type="bottom" id="VjT-J2-dfo"/>
@@ -44,7 +44,7 @@
         <!--Account View Controller-->
         <scene sceneID="DSD-ws-TBD">
             <objects>
-                <viewController storyboardIdentifier="create-account-view-controller" id="C8Z-lB-FnR" customClass="AccountViewController" customModule="FirebaseAuth" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="create-account-view-controller" id="C8Z-lB-FnR" customClass="AccountViewController" customModule="LoginFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tL7-pF-82P"/>
                         <viewControllerLayoutGuide type="bottom" id="iM0-8t-1sj"/>
@@ -62,7 +62,7 @@
         <!--Login View Controller-->
         <scene sceneID="acW-AI-RTd">
             <objects>
-                <viewController storyboardIdentifier="login-view-controller" id="rfu-p9-qTq" customClass="LoginViewController" customModule="FirebaseAuth" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login-view-controller" id="rfu-p9-qTq" customClass="LoginViewController" customModule="LoginFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IaV-uy-BfE"/>
                         <viewControllerLayoutGuide type="bottom" id="OjS-KT-LAw"/>
@@ -71,7 +71,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tb1-q7-cTS" customClass="LoginView" customModule="FirebaseAuth" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tb1-q7-cTS" customClass="LoginView" customModule="LoginFirebase" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -87,7 +87,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="main-view-controller" id="BYZ-38-t0r" customClass="MainViewController" customModule="FirebaseAuth" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main-view-controller" id="BYZ-38-t0r" customClass="MainViewController" customModule="LoginFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
