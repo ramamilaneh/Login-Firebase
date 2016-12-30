@@ -146,5 +146,4 @@ class CreateAccountView: UIView {
         delegate?.cancelTapped(with: self)
     }
 
-
 }

@@ -13,25 +13,20 @@ import UIKit
 
 class FirebaseManager {
     
-    class func createAccount(with email: String, and password: String) {
+    class func createAccount(with email: String, and password: String, completion:@escaping (Bool)->Void) {
         
         FIRAuth.auth()!.createUser(withEmail: email, password: password, completion: { (user, error) in
-            if error == nil {
+            if user != nil {
                 FirebaseManager.signIn(with: email, and: password, completion: { (success) in
                     if success {
                         print("sing in successful")
+                        completion(true)
                     }else{
                         print("sing in faild")
-                        
+                        completion(false)
                     }
                 })
-                
-            } else {
-                
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .closeAccountVC, object: nil)
-                    
-                }
+
             }
         })
     }
@@ -39,12 +34,12 @@ class FirebaseManager {
     class func signIn(with email: String, and password: String, completion:@escaping (Bool)->Void) {
         
         FIRAuth.auth()!.signIn(withEmail: email, password: password, completion: { (user, error) in
-            if error == nil {
-                DispatchQueue.main.async {
+            if user != nil {
+               // DispatchQueue.main.async {
                     
-                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                  //  NotificationCenter.default.post(name: .closeLoginVC, object: nil)
                     completion(true)
-                }
+              //  }
             }else{
                 print("errrrrror")
                 completion(false)

@@ -17,17 +17,23 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        print("main VC")
         view.backgroundColor = UIColor.white
+        setupLogoutButton()
+        
+    }
+    
+    func setupLogoutButton() {
+        
         logoutButton.frame = CGRect(x: 12, y: 15, width: 80, height: 50)
         view.addSubview(logoutButton)
         logoutButton.setTitle("Logout", for: .normal)
         logoutButton.setTitleColor(UIColor.blue, for: .normal)
         logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
-        
     }
-    
-    
 
+    
+    
     func logout() {
         
         do{
@@ -37,8 +43,9 @@ class MainViewController: UIViewController {
             print(error)
             print("errrrrror")
         }
-      let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "login-view-controller") as! LoginViewController
-        present(destVC, animated: true)
+        NotificationCenter.default.post(name: .closeMainVC, object: nil)
+//      let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "login-view-controller") as! LoginViewController
+//        present(destVC, animated: true)
         
     }
 }

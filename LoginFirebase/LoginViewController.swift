@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController, UITextFieldDelegate{
     
@@ -16,13 +17,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        self.loginView = LoginView(frame: self.view.frame)
-        self.view.addSubview(loginView)
-        self.loginView.translatesAutoresizingMaskIntoConstraints = false
-        self.loginView.constrainEdges(to: self.view)
-        self.loginView.emailTextField.delegate = self
-        self.loginView.passwordTextField.delegate = self
-        self.loginView.delegate = self
+        print("Login VC")
+        setupLoginView()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
         
@@ -37,8 +33,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         return .lightContent
     }
     
+    func setupLoginView() {
+        
+        self.loginView = LoginView(frame: self.view.frame)
+        self.view.addSubview(loginView)
+        self.loginView.translatesAutoresizingMaskIntoConstraints = false
+        self.loginView.constrainEdges(to: self.view)
+        self.loginView.emailTextField.delegate = self
+        self.loginView.passwordTextField.delegate = self
+        self.loginView.delegate = self
+        
+    }
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         if textField == self.loginView.emailTextField {
             self.loginView.emailTextField.becomeFirstResponder()
         }
@@ -60,17 +69,23 @@ extension LoginViewController: LoginDelegate {
     func signInButtonTapped(with sender: LoginView) {
         print("signIn tapped")
         if let email = self.loginView.emailTextField.text, let password = self.loginView.passwordTextField.text {
+            
             FirebaseManager.signIn(with: email, and: password, completion: { (success) in
                 if !success{
                     let alertController = UIAlertController(title: "Error", message: "Email or Password is incorrect", preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                     alertController.addAction(okAction)
-                    self.present(alertController, animated: true, completion: nil)
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true, completion: nil)
+
+                    }
                     
                 }else{
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                    }
                     
-                    let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "main-view-controller") as! MainViewController
-                    self.present(destVC, animated: true, completion: nil)
                 }
             })
         }

@@ -20,6 +20,7 @@ import FacebookCore
 
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         addNotificationObservers()
         loadInitialViewController()
@@ -44,6 +45,8 @@ import FacebookCore
         func addNotificationObservers() {
             NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeLoginVC, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeMainVC, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeAccountVC, object: nil)
+            
         }
         
     }
@@ -53,7 +56,7 @@ extension AppController {
     
     func loadInitialViewController() {
         
-        let id: StoryboardID = FIRAuth.auth()?.currentUser?.uid != nil ? .mainVC : .loginVC
+       let id: StoryboardID = FIRAuth.auth()?.currentUser?.uid != nil ? .mainVC : .loginVC
        self.actingVC = self.loadViewController(withID: id)
        self.add(viewController: self.actingVC, animated: true)
     }
@@ -101,14 +104,13 @@ extension AppController {
     }
     
     private func switchToViewController(with id: StoryboardID) {
-        
         let existingVC = actingVC
         existingVC?.willMove(toParentViewController: nil)
         actingVC = loadViewController(withID: id)
         add(viewController: actingVC)
         actingVC.view.alpha = 0.0
         
-        UIView.animate(withDuration: 0.8, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.actingVC.view.alpha = 1.0
             existingVC?.view.alpha = 0.0
         }) { success in
@@ -119,37 +121,11 @@ extension AppController {
         
     }
     
-    
-}
-
-
-// MARK: - Notification Extension
-extension Notification.Name {
-    
-    static let closeLoginVC = Notification.Name("close-login-view-controller")
-    static let closeAccountVC = Notification.Name("create-account-view-controller")
-    static let closeMainVC = Notification.Name("close-main-view-controller")
-    
-}
-
-
-// MARK: - UIView Extension
-
-
-extension UIView {
-    func insertGradianPinkColor() {
-        let firstColor = UIColor(red: 76/255, green: 48/255, blue: 57/255, alpha: 1).cgColor
-        let secondColor = UIColor(red: 158/255, green: 100/255, blue: 117/255, alpha: 1).cgColor
-        let thirdColor = UIColor(red: 255/255, green: 161/255, blue: 189/255, alpha: 1).cgColor
-        let gradian: CAGradientLayer
-        gradian = CAGradientLayer()
-        gradian.colors = [ firstColor,secondColor,thirdColor]
-        gradian.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradian.endPoint = CGPoint(x: 0.0, y: 1.0)
-        gradian.frame = self.frame
-        self.layer.insertSublayer(gradian, at: 0)
         
-        
-    }
-
+    
 }
+
+
+
+
+

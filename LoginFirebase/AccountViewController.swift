@@ -24,16 +24,7 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        print("create VC")
-
-        self.createView = CreateAccountView(frame: self.view.frame)
-        self.view.addSubview(createView)
-        self.createView.translatesAutoresizingMaskIntoConstraints = false
-        self.createView.constrainEdges(to: self.view)
-        self.createView.delegate = self
-        self.createView.emailTextField.delegate = self
-        self.createView.passwordTextField.delegate = self
-        self.createView.confirmPasswordTextField.delegate = self
+        setupCreatAccountView()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
         
@@ -52,7 +43,21 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    func setupCreatAccountView() {
+        
+        self.createView = CreateAccountView(frame: self.view.frame)
+        self.view.addSubview(createView)
+        self.createView.translatesAutoresizingMaskIntoConstraints = false
+        self.createView.constrainEdges(to: self.view)
+        self.createView.delegate = self
+        self.createView.emailTextField.delegate = self
+        self.createView.passwordTextField.delegate = self
+        self.createView.confirmPasswordTextField.delegate = self
+        
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
         switch textField {
         case createView.emailTextField:
             isEmailValid = validateEmail(text: createView.emailTextField.text!)
@@ -97,16 +102,24 @@ extension AccountViewController: CreateAccountDelegate {
     func signUpTapped(with sender: CreateAccountView) {
         
         if checkIfAllFieldsValid() {
-        
-        if let email = self.createView.emailTextField.text, let password = self.createView.passwordTextField.text {
-                FirebaseManager.createAccount(with: email, and: password)
-
+            
+            if let email = self.createView.emailTextField.text, let password = self.createView.passwordTextField.text {
+                FirebaseManager.createAccount(with: email, and: password, completion: { (success) in
+                    if !success {
+                        let alertController = UIAlertController(title: "Error", message: "Creation failed. Please Try Again", preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                        alertController.addAction(okAction)
+                        self.present(alertController, animated: true, completion: nil)
+                        
+                    }
+                })
+                
             }
-                    
-        let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "main-view-controller") as! MainViewController
+            
+            let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "main-view-controller") as! MainViewController
             self.present(destVC, animated: true, completion: nil)
-           
-       }
+            
+        }
         
     }
     
@@ -115,7 +128,10 @@ extension AccountViewController: CreateAccountDelegate {
     }
 }
 
+// MARK: - Notification Extension
 extension AccountViewController {
+    
+    // MARK: - check validation Funcs
     
     func validateEmail(text: String) -> Bool {
         if !(text.characters.count > 0) {

@@ -151,37 +151,6 @@ class LoginView: UIView {
 
 }
 
-extension UIView {
-    
-    func constrainEdges(to view: UIView) {
-        
-        leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
-    
 
-    func insertgradianPinkColor() {
-        let firstColor = UIColor(red: 76/255, green: 48/255, blue: 57/255, alpha: 1).cgColor
-        let secondColor = UIColor(red: 158/255, green: 100/255, blue: 117/255, alpha: 1).cgColor
-        let gradian: CAGradientLayer
-        gradian = CAGradientLayer()
-        gradian.colors = [ firstColor,secondColor,firstColor]
-        gradian.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradian.endPoint = CGPoint(x: 0.0, y: 1.0)
-        gradian.frame = self.frame
-        self.layer.insertSublayer(gradian, at: 0)
-        
-        
-    }
-}
 
-extension UITextField {
-    func setLeftPaddingPoints(_ amount:CGFloat){
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
-        self.leftView = paddingView
-        self.leftViewMode = .always
-  }
-}
 
