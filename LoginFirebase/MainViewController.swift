@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 class MainViewController: UIViewController {
     
@@ -38,9 +39,9 @@ class MainViewController: UIViewController {
         
         do{
             try FIRAuth.auth()?.signOut()
-
-        }catch let error{
-            print(error)
+            GIDSignIn.sharedInstance().signOut()
+        }catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
         }
         NotificationCenter.default.post(name: .closeMainVC, object: nil)
     }

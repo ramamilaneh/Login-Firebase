@@ -143,3 +143,15 @@ extension LoginViewController: LoginDelegate {
     }
 }
 
+extension LoginViewController {
+    
+    func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
+        viewController.dismiss(animated: false, completion: { _ in
+        })
+    }
+    
+    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
+        present(viewController, animated: true, completion: nil)
+    }
+}
+
