@@ -17,7 +17,7 @@ import FacebookCore
 
     @IBOutlet weak var containerView: UIView!
     var actingVC: UIViewController!
-
+    
     
     override func viewDidLoad() {
         
@@ -43,6 +43,7 @@ import FacebookCore
     extension AppController {
         
         func addNotificationObservers() {
+            
             NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeLoginVC, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeMainVC, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeAccountVC, object: nil)

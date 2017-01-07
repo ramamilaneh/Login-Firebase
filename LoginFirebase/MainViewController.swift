@@ -41,12 +41,8 @@ class MainViewController: UIViewController {
 
         }catch let error{
             print(error)
-            print("errrrrror")
         }
         NotificationCenter.default.post(name: .closeMainVC, object: nil)
-//      let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "login-view-controller") as! LoginViewController
-//        present(destVC, animated: true)
-        
     }
 }
 

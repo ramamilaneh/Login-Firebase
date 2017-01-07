@@ -36,6 +36,7 @@ struct UserNotification {
 
 
 struct ErrorMessage {
+    
     static var authFailed = "User authentication failed. Please make sure password is correct"
     static var passwordEmpty = "Current password cannot be empty"
     static var confirmPasswordEmpty = "Confirm password cannot be empty"
@@ -53,6 +54,7 @@ struct ErrorMessage {
 }
 
 struct SuccessMessage {
+    
     static var passwordChanged = "Password successfully changed"
     static var emailChanged = "Email successfully changed"
 }

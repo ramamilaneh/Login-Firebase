@@ -35,11 +35,9 @@ class FirebaseManager {
         
         FIRAuth.auth()!.signIn(withEmail: email, password: password, completion: { (user, error) in
             if user != nil {
-               // DispatchQueue.main.async {
                     
-                  //  NotificationCenter.default.post(name: .closeLoginVC, object: nil)
                     completion(true)
-              //  }
+             
             }else{
                 print("errrrrror")
                 completion(false)
