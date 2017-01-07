@@ -14,6 +14,9 @@ protocol LoginDelegate: class {
     func signInButtonTapped(with sender: LoginView)
     func createAccountTapped(with sender: LoginView)
     func forgotPasswordTapped(with sender: LoginView)
+    func googleSignInButtonTapped(with sender: LoginView)
+
+    
 }
 
 class LoginView: UIView {
@@ -147,6 +150,12 @@ class LoginView: UIView {
         self.googleSignIn.layer.cornerRadius = 0.5 * self.googleSignIn.bounds.size.width
         self.googleSignIn.clipsToBounds = true
         self.googleSignIn.setImage(UIImage(named:"google.png"), for: .normal)
+        self.googleSignIn.addTarget(self, action: #selector(signInWithGoogle), for: .touchUpInside)
+    }
+    
+    func signInWithGoogle() {
+        
+        delegate?.googleSignInButtonTapped(with: self)
     }
     
 

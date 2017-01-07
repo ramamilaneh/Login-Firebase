@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
-class LoginViewController: UIViewController, UITextFieldDelegate{
+class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate{
     
     var loginView: LoginView!
     
@@ -20,6 +21,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         setupLoginView()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
+        GIDSignIn.sharedInstance().uiDelegate = self
         
     }
     
@@ -133,6 +135,11 @@ extension LoginViewController: LoginDelegate {
         
         self.present(alertController, animated: true, completion: nil)
         
+    }
+    
+    func googleSignInButtonTapped(with sender: LoginView) {
+        
+        GIDSignIn.sharedInstance().signIn()
     }
 }
 

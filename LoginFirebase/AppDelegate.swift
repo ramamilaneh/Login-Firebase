@@ -8,12 +8,13 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
+    var firebaseManager = FirebaseManager()
     override init() {
         super.init()
         FIRApp.configure()
@@ -36,8 +37,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
         }
+        
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = firebaseManager
         return true
         
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
+        let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
+        let urlString = url.absoluteString
+        if urlString.contains("com.googleusercontent") {
+            return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
+        }
+        
+        return true
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

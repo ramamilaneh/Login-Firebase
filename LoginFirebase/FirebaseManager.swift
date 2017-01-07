@@ -10,8 +10,9 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import UIKit
+import GoogleSignIn
 
-class FirebaseManager {
+class FirebaseManager: NSObject {
     
     class func createAccount(with email: String, and password: String, completion:@escaping (Bool)->Void) {
         
@@ -42,4 +43,30 @@ class FirebaseManager {
             }
         })
     }
+}
+extension FirebaseManager: GIDSignInDelegate {
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        if let error = error {
+            print(error.localizedDescription)
+        }else{
+            print("successful login")
+        }
+        
+        let idtoken = user.authentication.idToken ?? "error in token"
+        let accessToken = user.authentication.accessToken ?? "invalid access token"
+        let credentials = FIRGoogleAuthProvider.credential(withIDToken: idtoken, accessToken: accessToken)
+        FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }else{
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                }
+            }
+        })
+        
+    }
+    
 }
