@@ -17,7 +17,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        print("Login VC")
         setupLoginView()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
@@ -79,7 +78,7 @@ extension LoginViewController: LoginDelegate {
                     
                     DispatchQueue.main.async {
                         self.present(alertController, animated: true, completion: nil)
-
+                        
                     }
                     
                 }else{
@@ -94,6 +93,7 @@ extension LoginViewController: LoginDelegate {
     }
     
     func createAccountTapped(with sender: LoginView) {
+        
         print("create account tapped")
         let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "create-account-view-controller") as! AccountViewController
         destVC.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
@@ -103,36 +103,35 @@ extension LoginViewController: LoginDelegate {
     }
     
     func forgotPasswordTapped(with sender: LoginView) {
+        
         print("forgotPassword tapped")
+        let alertController = UIAlertController(title: "Forgot My Password", message: "Enter your email address so we can send you info on how to reset your password.", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         
-            
-            let alertController = UIAlertController(title: "Forgot My Password", message: "Enter your email address so we can send you info on how to reset your password.", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-            
-            let sendAction = UIAlertAction(title: "Send", style: .default) { (action) in
-                let emailField = alertController.textFields![0]
-                if let email = emailField.text {
-                    
-                    FIRAuth.auth()?.sendPasswordReset(withEmail: email, completion: { (error) in
-                        if let error = error {
-                            let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
-                            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-                            alertController.addAction(okAction)
-                            self.present(alertController, animated: true, completion: nil)
-                        } else {
-                            UserNotification.show("Password reset e-mail sent")
-                        }
-                    })
-                }
+        let sendAction = UIAlertAction(title: "Send", style: .default) { (action) in
+            let emailField = alertController.textFields![0]
+            if let email = emailField.text {
+                
+                FIRAuth.auth()?.sendPasswordReset(withEmail: email, completion: { (error) in
+                    if let error = error {
+                        let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                        alertController.addAction(okAction)
+                        self.present(alertController, animated: true, completion: nil)
+                    } else {
+                        UserNotification.show("Password reset e-mail sent")
+                    }
+                })
             }
+        }
         
-            alertController.addAction(sendAction)
-            alertController.addAction(cancelAction)
-            alertController.addTextField { (textfield) in
-                textfield.placeholder = "Enter E-mail address"
-            }
-            
-            self.present(alertController, animated: true, completion: nil)
+        alertController.addAction(sendAction)
+        alertController.addAction(cancelAction)
+        alertController.addTextField { (textfield) in
+            textfield.placeholder = "Enter E-mail address"
+        }
+        
+        self.present(alertController, animated: true, completion: nil)
         
     }
 }

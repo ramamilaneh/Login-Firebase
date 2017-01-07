@@ -59,7 +59,6 @@ extension UIView {
 extension Notification.Name {
     
     static let closeLoginVC = Notification.Name("close-login-view-controller")
-    static let closeAccountVC = Notification.Name("create-account-view-controller")
     static let closeMainVC = Notification.Name("close-main-view-controller")
     
 }

@@ -23,9 +23,11 @@ class LoginView: UIView {
     
     var emailTextField = UITextField()
     var passwordTextField = UITextField()
+    var orLabel = UILabel()
     var signInButton = UIButton()
     var createAccountButton = UIButton()
     var forgotPaswordButton = UIButton()
+    var googleSignIn = UIButton()
     let textColor = UIColor(red: 253/255, green: 255/255, blue: 169/255, alpha: 1)
     weak var delegate: LoginDelegate?
 
@@ -47,11 +49,18 @@ class LoginView: UIView {
         self.addSubview(contentView)
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.constrainEdges(to: self)
+        self.contentView.addSubview(orLabel)
+        self.orLabel.text = "OR SIGN IN WITH"
+        let x = self.frame.midX - 60
+        self.orLabel.frame = CGRect(x: x, y: self.frame.midY + 120, width: 150, height: 50)
+        self.orLabel.backgroundColor = UIColor.clear
+        self.orLabel.textColor = self.textColor
         setupEmailTextField()
         setupPasswordTextField()
         setupSignInButton()
         setupCreateAccountButton()
         setupForgotPasswordButton()
+        setupGoogleSignInButton()
 
         
     }
@@ -128,6 +137,16 @@ class LoginView: UIView {
     func forgotPassword() {
      
         delegate?.forgotPasswordTapped(with: self)
+    }
+    
+    func setupGoogleSignInButton() {
+        
+        self.contentView.addSubview(googleSignIn)
+        self.googleSignIn.frame = CGRect(x: self.frame.maxX/2 - 25, y: self.frame.midY + 200, width: 50, height: 50)
+        self.googleSignIn.backgroundColor = UIColor.clear
+        self.googleSignIn.layer.cornerRadius = 0.5 * self.googleSignIn.bounds.size.width
+        self.googleSignIn.clipsToBounds = true
+        self.googleSignIn.setImage(UIImage(named:"google.png"), for: .normal)
     }
     
 
