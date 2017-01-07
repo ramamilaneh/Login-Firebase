@@ -73,4 +73,35 @@ extension UITextField {
         self.leftView = paddingView
         self.leftViewMode = .always
     }
+    
+    // Setup the TextField
+    func setup() {
+        
+        let textcolor = UIColor(red: 253/255, green: 255/255, blue: 169/255, alpha: 1)
+        self.backgroundColor = UIColor.clear
+        self.layer.borderWidth = 1.5
+        self.layer.borderColor = UIColor(red: 158/255, green: 100/255, blue: 117/255, alpha: 1).cgColor
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 5
+        self.textColor = textcolor
+        self.setLeftPaddingPoints(25)
+        self.isSecureTextEntry = true
+        
+    }
+}
+
+// MARK: - UIButton Extension
+extension UIButton {
+    
+    func setup() {
+        
+        let textcolor = UIColor(red: 253/255, green: 255/255, blue: 169/255, alpha: 1)
+        self.backgroundColor = UIColor(red: 255/255, green: 161/255, blue: 189/255, alpha: 1)
+        self.titleLabel?.font = UIFont(name: "Times New Roman Bold", size: 19)
+        self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 19)
+        self.setTitleColor(textcolor, for: .normal)
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 27
+        
+    }
 }

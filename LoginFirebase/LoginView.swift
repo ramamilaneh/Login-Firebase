@@ -62,15 +62,9 @@ class LoginView: UIView {
         
         self.contentView.addSubview(emailTextField)
         self.emailTextField.frame = CGRect(x: self.frame.midX*0.1, y: self.frame.midY/3, width: self.frame.width*0.9, height: 50)
-        self.emailTextField.backgroundColor = UIColor.clear
-        self.emailTextField.layer.borderWidth = 1.5
-        self.emailTextField.layer.borderColor = UIColor(red: 158/255, green: 100/255, blue: 117/255, alpha: 1).cgColor
-        self.emailTextField.clipsToBounds = true
-        self.emailTextField.layer.cornerRadius = 5
-        self.emailTextField.textColor = textColor
+        self.emailTextField.setup()
         let color = UIColor(red: 158/255, green: 100/255, blue: 117/255, alpha: 1)
         self.emailTextField.attributedPlaceholder = NSAttributedString(string: " example@emailprovider.com", attributes: [NSForegroundColorAttributeName: color])
-        self.emailTextField.setLeftPaddingPoints(25)
        
     }
     
@@ -79,14 +73,7 @@ class LoginView: UIView {
         self.contentView.addSubview(passwordTextField)
         let heightOffset = self.frame.midY/3 + self.emailTextField.frame.height + 10
         self.passwordTextField.frame = CGRect(x: self.frame.midX*0.1, y: heightOffset, width: self.frame.width*0.9, height: 50)
-        self.passwordTextField.backgroundColor = UIColor.clear
-        self.passwordTextField.layer.borderWidth = 1.5
-        self.passwordTextField.layer.borderColor = UIColor(red: 158/255, green: 100/255, blue: 117/255, alpha: 1).cgColor
-        self.passwordTextField.clipsToBounds = true
-        self.passwordTextField.layer.cornerRadius = 5
-        self.passwordTextField.textColor = textColor
-        self.passwordTextField.setLeftPaddingPoints(25)
-        self.passwordTextField.isSecureTextEntry = true
+        self.passwordTextField.setup()
         let color = UIColor(red: 158/255, green: 100/255, blue: 117/255, alpha: 1)
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string: " Password", attributes: [NSForegroundColorAttributeName: color])
         
@@ -97,13 +84,8 @@ class LoginView: UIView {
         self.contentView.addSubview(signInButton)
         let x = self.frame.midX - self.frame.width*0.25
         self.signInButton.frame = CGRect(x: x, y: self.frame.maxY/2 - 70, width: self.frame.width*0.5, height: 50)
-        self.signInButton.backgroundColor = UIColor(red: 255/255, green: 161/255, blue: 189/255, alpha: 1)
         self.signInButton.setTitle("SIGN IN", for: .normal)
-        self.signInButton.titleLabel?.font = UIFont(name: "Times New Roman Bold", size: 19)
-        self.signInButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 19)
-        self.signInButton.setTitleColor(textColor, for: .normal)
-        self.signInButton.clipsToBounds = true
-        self.signInButton.layer.cornerRadius = 27
+        self.signInButton.setup()
         self.signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
     
     }
