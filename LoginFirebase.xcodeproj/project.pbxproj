@@ -191,6 +191,7 @@
 				TargetAttributes = {
 					A287A15D1E0BFF2800D5F613 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = LQ8JCXM85J;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -415,6 +416,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LQ8JCXM85J;
 				INFOPLIST_FILE = LoginFirebase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Flatiron-School.LoginFirebase";
@@ -429,6 +431,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LQ8JCXM85J;
 				INFOPLIST_FILE = LoginFirebase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Flatiron-School.LoginFirebase";

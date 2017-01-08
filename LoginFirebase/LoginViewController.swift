@@ -141,6 +141,14 @@ extension LoginViewController: LoginDelegate {
         
         GIDSignIn.sharedInstance().signIn()
     }
+    
+    func facebookSignInButtonTapped(with sender: LoginView) {
+        print("facebook tapped")
+    }
+    
+    func twitterSignInButtonTapped(with sender: LoginView) {
+        print("twitter tapped")
+    }
 }
 
 extension LoginViewController {
