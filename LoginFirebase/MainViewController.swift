@@ -36,7 +36,7 @@ class MainViewController: UIViewController {
     
     
     func logout() {
-        
+        print("logout tapped")
         do{
             try FIRAuth.auth()?.signOut()
             GIDSignIn.sharedInstance().signOut()
@@ -44,6 +44,7 @@ class MainViewController: UIViewController {
             print ("Error signing out: %@", signOutError)
         }
         NotificationCenter.default.post(name: .closeMainVC, object: nil)
+
     }
 }
 

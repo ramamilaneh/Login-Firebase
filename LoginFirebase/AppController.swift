@@ -46,6 +46,10 @@ import FacebookCore
             
             NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeLoginVC, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeMainVC, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .openMainVC, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .openCreateVC, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeCreateVC, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeCreateVCToLogin, object: nil)
             
         }
         
@@ -95,6 +99,14 @@ extension AppController {
             switchToViewController(with: .mainVC)
         case Notification.Name.closeMainVC:
             switchToViewController(with: .loginVC)
+        case Notification.Name.closeCreateVC:
+            switchToViewController(with: .mainVC)
+        case Notification.Name.closeCreateVCToLogin:
+            switchToViewController(with: .loginVC)
+        case Notification.Name.openMainVC:
+            switchToViewController(with: .mainVC)
+        case Notification.Name.openCreateVC:
+            switchToViewController(with: .accountVC)
         default:
             fatalError("\(#function) - Unable to match notficiation name.")
         }

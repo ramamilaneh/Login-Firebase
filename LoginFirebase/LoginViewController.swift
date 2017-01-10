@@ -97,10 +97,8 @@ extension LoginViewController: LoginDelegate {
     func createAccountTapped(with sender: LoginView) {
         
         print("create account tapped")
-        let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "create-account-view-controller") as! AccountViewController
-        destVC.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
-        destVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.present(destVC, animated: true, completion: nil)
+        NotificationCenter.default.post(name: .openCreateVC, object: nil)
+
         
     }
     

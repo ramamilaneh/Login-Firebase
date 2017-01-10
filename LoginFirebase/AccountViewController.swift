@@ -115,16 +115,13 @@ extension AccountViewController: CreateAccountDelegate {
                 })
                 
             }
-            
-            let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "main-view-controller") as! MainViewController
-            self.present(destVC, animated: true, completion: nil)
-            
+            NotificationCenter.default.post(name: .openMainVC, object: nil)
         }
         
     }
     
     func cancelTapped(with sender: CreateAccountView) {
-        dismiss(animated: true, completion: nil)
+        NotificationCenter.default.post(name: .closeCreateVCToLogin, object: nil)
     }
 }
 

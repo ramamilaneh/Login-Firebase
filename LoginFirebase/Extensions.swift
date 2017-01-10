@@ -60,6 +60,14 @@ extension Notification.Name {
     
     static let closeLoginVC = Notification.Name("close-login-view-controller")
     static let closeMainVC = Notification.Name("close-main-view-controller")
+    static let openMainVC = Notification.Name("open-main-view-controller")
+    static let closeCreateVCToLogin = Notification.Name("close-create-account-view-controller-to-login-view-controller")
+    static let openCreateVC = Notification.Name("open-create-account-view-controller")
+    static let closeCreateVC = Notification.Name("close-create-account-view-controller")
+
+    
+
+    
     
 }
 

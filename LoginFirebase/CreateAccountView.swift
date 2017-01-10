@@ -60,6 +60,8 @@ class CreateAccountView: UIView {
         self.emailTextField.setup()
         let color = UIColor(red: 158/255, green: 100/255, blue: 117/255, alpha: 1)
         self.emailTextField.attributedPlaceholder = NSAttributedString(string: " example@emailprovider.com", attributes: [NSForegroundColorAttributeName: color])
+        self.emailTextField.isSecureTextEntry = false
+
         
     }
     
