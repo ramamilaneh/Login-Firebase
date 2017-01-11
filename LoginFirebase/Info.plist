@@ -26,9 +26,36 @@
 				<string>com.googleusercontent.apps.1001154439637-jumftrf77rnhpmgsskn09psq16fvocj7</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb595078514021028</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>https://fir-auth-8bdff.firebaseapp.com/__/auth/handler</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>595078514021028</string>
+	<key>FacebookDisplayName</key>
+	<string>LoginFirebase</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import UIKit
 import GoogleSignIn
+import FBSDKLoginKit
 
 class FirebaseManager: NSObject {
     
@@ -94,3 +95,31 @@ extension FirebaseManager: GIDSignInDelegate {
     }
     
 }
+
+extension FirebaseManager: FBSDKLoginButtonDelegate {
+    
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+       
+            
+            guard result != nil, !result.isCancelled, error == nil else { /* TODO */  return }
+            
+            guard let accessToken = FBSDKAccessToken.current()?.tokenString else { /* TODO */ return }
+            
+            let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken)
+            
+            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                }
+            }
+    
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+       
+        
+    }
+    
+}
+

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,10 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
         }
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = firebaseManager
         return true
+        
+        
         
     }
     
@@ -49,6 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
         let annotation = options[UIApplicationOpenURLOptionsKey.annotation]
         let urlString = url.absoluteString
+        if urlString.contains("fb595078514021028") {
+            return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        }
         if urlString.contains("com.googleusercontent") {
             return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
         }

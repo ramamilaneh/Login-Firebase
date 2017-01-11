@@ -8,8 +8,8 @@
 
 import UIKit
 import Firebase
-import FacebookLogin
-import FacebookCore
+//import FacebookLogin
+//import FacebookCore
 
 
 
@@ -114,6 +114,7 @@ extension AppController {
     }
     
     private func switchToViewController(with id: StoryboardID) {
+        
         let existingVC = actingVC
         existingVC?.willMove(toParentViewController: nil)
         actingVC = loadViewController(withID: id)

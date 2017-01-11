@@ -9,11 +9,11 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate{
     
     var loginView: LoginView!
-    
     
     override func viewDidLoad() {
         
@@ -22,6 +22,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
         GIDSignIn.sharedInstance().uiDelegate = self
+//        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+//        self.loginView.facebookSignIn.delegate = appdelegate.firebaseManager
         
     }
     
@@ -62,6 +64,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
     func dismissKeyboard() {
         view.endEditing(true)
     }
+    
     
 }
 
@@ -142,10 +145,42 @@ extension LoginViewController: LoginDelegate {
     
     func facebookSignInButtonTapped(with sender: LoginView) {
         print("facebook tapped")
-    }
+           FBSDKLoginManager().loginBehavior = .browser
+           FBSDKLoginManager().logIn(withReadPermissions: ["email"], from: self, handler: { (result, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+                return
+            }else{
+                if let result = result {
+                if let accessToken = result.token.tokenString {
+                    let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken)
+
+                    FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                        if let error = error {
+                            print(error.localizedDescription)
+                            let alert = UIAlertController(title: "error", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                            alert.addAction(okAction)
+                        }else{
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                            }
+                        }
+                }
+                }else{
+                    return
+                }
+            }
+            }
+           })
+            
+        }
+        
+    
     
     func twitterSignInButtonTapped(with sender: LoginView) {
         print("twitter tapped")
+        
     }
 }
 

@@ -47,6 +47,7 @@
 		A287A1871E0C01ED00D5F613 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A2C365601E143E3700156BE3 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		A2C365621E157A1600156BE3 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A2E1FEEF1E25A2FA00101997 /* LoginFirebase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LoginFirebase.entitlements; sourceTree = "<group>"; };
 		E00CB5898D2F22A66704008B /* Pods-LoginFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginFirebase.release.xcconfig"; path = "Pods/Target Support Files/Pods-LoginFirebase/Pods-LoginFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		F5749FDC90D7284C5F75BDEF /* Pods-LoginFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginFirebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LoginFirebase/Pods-LoginFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		F9110DECDE3D0F6A5F30E144 /* Pods_LoginFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoginFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +103,7 @@
 		A287A1601E0BFF2800D5F613 /* LoginFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				A2E1FEEF1E25A2FA00101997 /* LoginFirebase.entitlements */,
 				A287A18C1E0C027900D5F613 /* Supporting Files */,
 				A287A1891E0C021E00D5F613 /* Controller */,
 				A287A18A1E0C023400D5F613 /* View */,
@@ -193,6 +195,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = LQ8JCXM85J;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -416,6 +423,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LoginFirebase/LoginFirebase.entitlements;
 				DEVELOPMENT_TEAM = LQ8JCXM85J;
 				INFOPLIST_FILE = LoginFirebase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -431,6 +439,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LoginFirebase/LoginFirebase.entitlements;
 				DEVELOPMENT_TEAM = LQ8JCXM85J;
 				INFOPLIST_FILE = LoginFirebase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

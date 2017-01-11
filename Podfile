@@ -11,7 +11,9 @@ target 'LoginFirebase' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'GoogleSignIn'
-  pod 'FacebookLogin’
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKShareKit'
+  pod 'FBSDKLoginKit'
   pod 'Whisper'
   pod 'Firebase/Auth'
 

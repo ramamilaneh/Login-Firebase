@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKLoginKit
+//import FBSDKShareKit
 
 class MainViewController: UIViewController {
     
@@ -40,6 +42,7 @@ class MainViewController: UIViewController {
         do{
             try FIRAuth.auth()?.signOut()
             GIDSignIn.sharedInstance().signOut()
+            FBSDKLoginManager().logOut()
         }catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
