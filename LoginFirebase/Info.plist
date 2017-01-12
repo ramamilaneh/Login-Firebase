@@ -49,6 +49,8 @@
 	<string>595078514021028</string>
 	<key>FacebookDisplayName</key>
 	<string>LoginFirebase</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

@@ -10,7 +10,8 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
-//import FBSDKShareKit
+import FBSDKShareKit
+import FBSDKCoreKit
 
 class MainViewController: UIViewController {
     
@@ -39,10 +40,25 @@ class MainViewController: UIViewController {
     
     func logout() {
         print("logout tapped")
+        
+        
         do{
+            if FirebaseManager.sharedInstance.faceBool {
+                let alertController = UIAlertController(title: "Alert", message: "If you want to log out and sign in with different Facebook account, you should logout from your Facebook page first then log in to the app again", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alertController.addAction(action)
+              //  DispatchQueue.main.async {
+                    self.present(alertController, animated: true, completion: nil)
+                    
+            //    }
+                FBSDKLoginManager().logOut()
+                
+            }
+
             try FIRAuth.auth()?.signOut()
             GIDSignIn.sharedInstance().signOut()
-            FBSDKLoginManager().logOut()
+            
+    
         }catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }

@@ -15,6 +15,8 @@ import FBSDKLoginKit
 
 class FirebaseManager: NSObject {
     
+    static let sharedInstance = FirebaseManager()
+    var faceBool = false
     class func createAccount(with email: String, and password: String, completion:@escaping (Bool)->Void) {
         
         FIRAuth.auth()!.createUser(withEmail: email, password: password, completion: { (user, error) in
