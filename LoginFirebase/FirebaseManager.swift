@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 import UIKit
 import GoogleSignIn
-import FBSDKLoginKit
+import TwitterKit
 
 class FirebaseManager: NSObject {
     
@@ -45,6 +45,36 @@ class FirebaseManager: NSObject {
                 completion(false)
             }
         })
+    }
+    
+    class func signInWithTwitter() {
+        Twitter.sharedInstance().logIn(withMethods: .webBased) { (session, error) in
+
+            if error != nil {
+                print(error?.localizedDescription)
+            }else{
+            if session != nil {
+                if let unwrappedSession = session {
+                    let token = unwrappedSession.authToken
+                    let secret = unwrappedSession.authTokenSecret
+                    let credentials = FIRTwitterAuthProvider.credential(withToken: token, secret: secret)
+                    FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
+                        if let error = error {
+                            print(error.localizedDescription)
+                            let alert = UIAlertController(title: "error", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                            alert.addAction(okAction)
+                        }else{
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                            }
+                        }
+                        
+                    })
+                }
+            }
+        }
+        }
     }
 }
 extension FirebaseManager: GIDSignInDelegate {
@@ -94,33 +124,6 @@ extension FirebaseManager: GIDSignInDelegate {
             }
 
         }
-    }
-    
-}
-
-extension FirebaseManager: FBSDKLoginButtonDelegate {
-    
-    
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-       
-            
-            guard result != nil, !result.isCancelled, error == nil else { /* TODO */  return }
-            
-            guard let accessToken = FBSDKAccessToken.current()?.tokenString else { /* TODO */ return }
-            
-            let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken)
-            
-            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
-                }
-            }
-    
-    }
-    
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-       
-        
     }
     
 }

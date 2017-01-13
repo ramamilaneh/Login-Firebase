@@ -16,6 +16,7 @@ target 'LoginFirebase' do
   pod 'FBSDKLoginKit'
   pod 'Whisper'
   pod 'Firebase/Auth'
-
+  pod 'Fabric'
+  pod 'TwitterKit'
 
 end

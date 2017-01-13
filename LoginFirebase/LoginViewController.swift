@@ -24,9 +24,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDel
         view.addGestureRecognizer(tapGesture)
         GIDSignIn.sharedInstance().uiDelegate = self
         FBSDKLoginManager().loginBehavior = .web
-        //        let appdelegate = UIApplication.shared.delegate as! AppDelegate
-        //        self.loginView.facebookSignIn.delegate = appdelegate.firebaseManager
-        
+              
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -178,6 +176,7 @@ extension LoginViewController: LoginDelegate {
     
     func twitterSignInButtonTapped(with sender: LoginView) {
         print("twitter tapped")
+        FirebaseManager.signInWithTwitter()
         
     }
 }

@@ -42,9 +42,34 @@
 				<string>https://fir-auth-8bdff.firebaseapp.com/__/auth/handler</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array/>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>a665d88fb85765aac751dd3aebed356cac1e39fd</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>consumerKey</key>
+					<string>zxCN6cyD7WZD04U6Vf0OEyUMO</string>
+					<key>consumerSecret</key>
+					<string>5R9LvrYRDtNZ1aauso1bt7y5NLJUZj809HI2VgAfhMX5AcTCrQ</string>
+				</dict>
+				<key>KitName</key>
+				<string>Twitter</string>
+			</dict>
+		</array>
+	</dict>
 	<key>FacebookAppID</key>
 	<string>595078514021028</string>
 	<key>FacebookDisplayName</key>
