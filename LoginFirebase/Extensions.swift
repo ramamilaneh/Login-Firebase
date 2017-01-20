@@ -1,7 +1,6 @@
-//
+
 //  Extensions.swift
 //  LoginFirebase
-//
 //  Created by Rama Milaneh on 12/29/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
@@ -25,7 +24,6 @@ extension UIView {
         gradian.frame = self.frame
         self.layer.insertSublayer(gradian, at: 0)
         
-        
     }
     
     // constrain the view to the edges of the super view
@@ -39,6 +37,7 @@ extension UIView {
     
     // create gradient color for the login view
     func insertgradianPinkColor() {
+        
         let firstColor = UIColor(red: 76/255, green: 48/255, blue: 57/255, alpha: 1).cgColor
         let secondColor = UIColor(red: 158/255, green: 100/255, blue: 117/255, alpha: 1).cgColor
         let gradian: CAGradientLayer
@@ -49,9 +48,7 @@ extension UIView {
         gradian.frame = self.frame
         self.layer.insertSublayer(gradian, at: 0)
         
-        
     }
-
     
 }
 
@@ -65,10 +62,6 @@ extension Notification.Name {
     static let openCreateVC = Notification.Name("open-create-account-view-controller")
     static let closeCreateVC = Notification.Name("close-create-account-view-controller")
 
-    
-
-    
-    
 }
 
 // MARK: - TextField Extension
@@ -76,6 +69,7 @@ extension UITextField {
     
     // add padding to the text
     func setLeftPaddingPoints(_ amount:CGFloat){
+        
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
         self.leftView = paddingView
         self.leftViewMode = .always

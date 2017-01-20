@@ -40,8 +40,6 @@ class LoginView: UIView {
     let textColor = UIColor(red: 253/255, green: 255/255, blue: 169/255, alpha: 1)
     weak var delegate: LoginDelegate?
 
-    
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -78,7 +76,6 @@ class LoginView: UIView {
     }
     
     // MARK: - setup functions
-    
     func setupEmailTextField() {
         
         self.contentView.addSubview(emailTextField)
@@ -202,8 +199,6 @@ class LoginView: UIView {
         
         delegate?.twitterSignInButtonTapped(with: self)
     }
-
-    
 
 }
 

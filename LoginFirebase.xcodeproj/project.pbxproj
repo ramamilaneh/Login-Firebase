@@ -172,6 +172,7 @@
 				D4110DCC06891D792E7585BB /* [CP] Embed Pods Frameworks */,
 				0536663033AB1EA6CBF642AF /* [CP] Copy Pods Resources */,
 				A24162EC1E2920F800B01596 /* ShellScript */,
+				A257FF711E32B9E900202FEF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -198,7 +199,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -281,6 +282,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" a665d88fb85765aac751dd3aebed356cac1e39fd 183ac0cc57cb78f99fbad84d9b9c2810233da097eee8e3e70d8d4b5182bcf5da";
+		};
+		A257FF711E32B9E900202FEF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
 		};
 		D4110DCC06891D792E7585BB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -437,7 +451,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = LoginFirebase/LoginFirebase.entitlements;
 				DEVELOPMENT_TEAM = LQ8JCXM85J;
 				INFOPLIST_FILE = LoginFirebase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -453,7 +466,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = LoginFirebase/LoginFirebase.entitlements;
 				DEVELOPMENT_TEAM = LQ8JCXM85J;
 				INFOPLIST_FILE = LoginFirebase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

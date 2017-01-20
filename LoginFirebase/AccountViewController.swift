@@ -20,7 +20,6 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
     var isPasswordValid: Bool = false
     var isConfirmPasswordValid: Bool = false
     
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -28,11 +27,8 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
         
-        
     }
-    
-    
-    
+ 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         self.createView.contentView.insertGradianPinkColor()
@@ -89,11 +85,9 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    
     func dismissKeyboard() {
         view.endEditing(true)
     }
-    
     
 }
 
@@ -106,7 +100,7 @@ extension AccountViewController: CreateAccountDelegate {
             if let email = self.createView.emailTextField.text, let password = self.createView.passwordTextField.text {
                 FirebaseManager.createAccount(with: email, and: password, completion: { (success) in
                     if !success {
-                        let alertController = UIAlertController(title: "Error", message: "Creation failed. Please Try Again", preferredStyle: .alert)
+                        let alertController = UIAlertController(title: "Error", message: "Creating an account was failed. Please Try Again", preferredStyle: .alert)
                         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                         alertController.addAction(okAction)
                         self.present(alertController, animated: true, completion: nil)
@@ -121,6 +115,7 @@ extension AccountViewController: CreateAccountDelegate {
     }
     
     func cancelTapped(with sender: CreateAccountView) {
+        
         NotificationCenter.default.post(name: .closeCreateVCToLogin, object: nil)
     }
 }
@@ -129,7 +124,6 @@ extension AccountViewController: CreateAccountDelegate {
 extension AccountViewController {
     
     // MARK: - check validation Funcs
-    
     func validateEmail(text: String) -> Bool {
         if !(text.characters.count > 0) {
             print("check validation")

@@ -11,9 +11,7 @@ import UIKit
 import Whisper
 
 struct UserNotification {
-    
-    
-    
+ 
     static func show(_ notification: String) {
         
         var murmur = Murmur(title: notification)

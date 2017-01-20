@@ -26,8 +26,6 @@ class CreateAccountView: UIView {
     let textcolor = UIColor(red: 253/255, green: 255/255, blue: 169/255, alpha: 1)
     weak var delegate: CreateAccountDelegate?
 
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -52,7 +50,6 @@ class CreateAccountView: UIView {
     }
     
     // MARK: - setup functions
-    
     func setupEmailTextField() {
         
         self.contentView.addSubview(emailTextField)

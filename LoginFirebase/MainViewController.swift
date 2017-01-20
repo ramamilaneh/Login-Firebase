@@ -22,7 +22,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        print("main VC")
         view.backgroundColor = UIColor.white
         setupLogoutButton()
         
@@ -40,26 +39,26 @@ class MainViewController: UIViewController {
     
     
     func logout() {
-        print("logout tapped")
-        
-        
+  
         do{
-            if FirebaseManager.sharedInstance.faceBool {
+            if FirebaseManager.sharedInstance.facebookBool {
                 let alertController = UIAlertController(title: "Alert", message: "If you want to log out and sign in with different Facebook account, you should logout from your Facebook page first then log in to the app again", preferredStyle: .alert)
                 let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
                 alertController.addAction(action)
                     self.present(alertController, animated: true, completion: nil)
                 FBSDKLoginManager().logOut()
-                
             }
-
+            if FirebaseManager.sharedInstance.gooleBool {
+                GIDSignIn.sharedInstance().signOut()
+            }
+            if FirebaseManager.sharedInstance.twitterBool {
+                let store = Twitter.sharedInstance().sessionStore
+                if let userID = store.session()?.userID {
+                    store.logOutUserID(userID)
+                }
+            }
             try FIRAuth.auth()?.signOut()
-            GIDSignIn.sharedInstance().signOut()
-            let store = Twitter.sharedInstance().sessionStore
             
-            if let userID = store.session()?.userID {
-                store.logOutUserID(userID)
-            }
     
         }catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)

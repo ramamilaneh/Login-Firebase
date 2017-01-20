@@ -12,7 +12,7 @@ import GoogleSignIn
 import FBSDKLoginKit
 import SafariServices
 
-class LoginViewController: UIViewController, UITextFieldDelegate, GIDSignInUIDelegate{
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     var loginView: LoginView!
     
@@ -98,7 +98,6 @@ extension LoginViewController: LoginDelegate {
     
     func createAccountTapped(with sender: LoginView) {
         
-        print("create account tapped")
         NotificationCenter.default.post(name: .openCreateVC, object: nil)
         
         
@@ -106,8 +105,7 @@ extension LoginViewController: LoginDelegate {
     
     func forgotPasswordTapped(with sender: LoginView) {
         
-        print("forgotPassword tapped")
-        let alertController = UIAlertController(title: "Forgot My Password", message: "Enter your email address so we can send you info on how to reset your password.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Forgot My Password", message: "Enter your email address to send the instructions to reset your password.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         
         let sendAction = UIAlertAction(title: "Send", style: .default) { (action) in
@@ -140,16 +138,16 @@ extension LoginViewController: LoginDelegate {
     func googleSignInButtonTapped(with sender: LoginView) {
         
         GIDSignIn.sharedInstance().signIn()
+        FirebaseManager.sharedInstance.gooleBool = true
     }
     
     func facebookSignInButtonTapped(with sender: LoginView) {
-        print("facebook tapped")
+        
         FBSDKLoginManager().logIn(withReadPermissions: ["email"], from: self, handler: { (result, error) in
-          
-            guard result != nil, !(result?.isCancelled)!, error == nil else { /* TODO */  return  FBSDKLoginManager().logOut()}
+            guard result != nil, !(result?.isCancelled)!, error == nil else { return  FBSDKLoginManager().logOut()}
 
                     if let accessToken = result?.token.tokenString {
-
+                      
                         let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken)
 
                         FIRAuth.auth()?.signIn(with: credential) { (user, error) in
@@ -160,14 +158,14 @@ extension LoginViewController: LoginDelegate {
                                 alert.addAction(okAction)
                             }else{
                                 DispatchQueue.main.async {
-                                    FirebaseManager.sharedInstance.faceBool = true
+                                    FirebaseManager.sharedInstance.facebookBool = true
 
                                     NotificationCenter.default.post(name: .closeLoginVC, object: nil)
                                 }
                             }
                         }
                     }
-          //  }
+          
         })
         
     }
@@ -175,17 +173,20 @@ extension LoginViewController: LoginDelegate {
     
     
     func twitterSignInButtonTapped(with sender: LoginView) {
-        print("twitter tapped")
+        
         FirebaseManager.signInWithTwitter()
+        FirebaseManager.sharedInstance.twitterBool = true
         
     }
 }
 
-extension LoginViewController {
+extension LoginViewController:  GIDSignInUIDelegate{
     
     func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
-        viewController.dismiss(animated: false, completion: { _ in
-        })
+        
+        viewController.dismiss(animated: true, completion: nil)
+        NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+
     }
     
     func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {

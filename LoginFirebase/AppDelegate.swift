@@ -27,29 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let userDefaults = UserDefaults.standard
-        if userDefaults.bool(forKey: "hasRunBefore") == false {
-            // Remove Keychain items here
-            // Update the flag indicator
-            userDefaults.set(true, forKey: "hasRunBefore")
-            userDefaults.synchronize() // Forces the app to update UserDefaults
-            do {
-                try FIRAuth.auth()?.signOut()
-            }catch {
-                
-            }
-            
-        }
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        
+      FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = firebaseManager
-        Twitter.sharedInstance().start(withConsumerKey: "zxCN6cyD7WZD04U6Vf0OEyUMO", consumerSecret: "5R9LvrYRDtNZ1aauso1bt7y5NLJUZj809HI2VgAfhMX5AcTCrQ")
         Fabric.with([Twitter.self])
         return true
-        
-        
-        
+            
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
